@@ -119,8 +119,8 @@ occlum_cc_library(
 
 occlum_cc_library(
     name = "sgx2_qvl_headers",
-    hdrs = glob(["ual/external/dcap/QuoteVerification/QVL/Src/dcap_quoteverify/inc/**/*.h"]),
-    strip_include_prefix = "ual/external/dcap/QuoteVerification/QVL/Src/dcap_quoteverify/inc/",
+    hdrs = glob(["ual/external/dcap/QuoteVerification/dcap_quoteverify/inc/**/*.h"]),
+    strip_include_prefix = "ual/external/dcap/QuoteVerification/dcap_quoteverify/inc/",
     deps = [
         ":sgx2_qvl_common_headers",
         ":sgx2_qvl_lib2_headers",

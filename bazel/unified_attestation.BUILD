@@ -81,7 +81,7 @@ occlum_cc_library(
     strip_include_prefix = "ual/include",
     deps = [
         ":cc_attestation_proto",
-        ":sgx_headers",
+        ":sgx2_qvl_headers",
         "@com_github_openssl_openssl//:openssl",
         "@com_github_rapidjson//:rapidjson",
         "@cppcodec",

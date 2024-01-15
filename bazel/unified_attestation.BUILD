@@ -81,7 +81,7 @@ occlum_cc_library(
     strip_include_prefix = "ual/include",
     deps = [
         ":cc_attestation_proto",
-        ":sgx_headers",
+        ":sgx2_qvl_headers",
         "@com_github_openssl_openssl//:openssl",
         "@com_github_rapidjson//:rapidjson",
         "@cppcodec",
@@ -103,7 +103,11 @@ occlum_cc_library(
 occlum_cc_library(
     name = "sgx2_qvl",
     srcs = glob([
-        "ual/verification/platforms/sgx2/qvl/**/*.cpp",
+        "ual/external/dcap/QuoteVerification/QvE/Enclave/qve.cpp",
+        "ual/external/dcap/QuoteVerification/QVL/Src/**/*.cpp",
+        "ual/verification/platforms/sgx2/Utils/*.cpp",
+        "ual/external/dcap/QuoteVerification/QVL/Src/AttestationLibrary/*.cpp",
+        "ual/external/dcap/QuoteVerification/QVL/Src/AttestationParsers/*.cpp",
     ]),
     deps = [
         "@com_github_rapidjson//:rapidjson",
@@ -114,8 +118,8 @@ occlum_cc_library(
 
 occlum_cc_library(
     name = "sgx2_qvl_headers",
-    hdrs = glob(["ual/verification/platforms/sgx2/qvl/include/**/*.h"]),
-    strip_include_prefix = "ual/verification/platforms/sgx2/qvl/include",
+    hdrs = glob(["ual/external/dcap/QuoteVerification/dcap_quoteverify/inc/**/*.h"]),
+    strip_include_prefix = "ual/external/dcap/QuoteVerification/dcap_quoteverify/inc/",
     deps = [
         ":sgx2_qvl_common_headers",
         ":sgx2_qvl_lib2_headers",
@@ -124,50 +128,57 @@ occlum_cc_library(
         ":sgx2_qvl_parser_headers",
         ":sgx2_qvl_utils_headers",
         ":sgx_headers",
+        ":sgx2_qve_headers",
     ],
 )
 
 occlum_cc_library(
     name = "sgx2_qvl_common_headers",
-    hdrs = glob(["ual/verification/platforms/sgx2/qvl/AttestationCommons/include/**/*.h"]),
-    strip_include_prefix = "ual/verification/platforms/sgx2/qvl/AttestationCommons/include",
+    hdrs = glob(["ual/external/dcap/QuoteVerification/QVL/Src/AttestationCommons/include/**/*.h"]),
+    strip_include_prefix = "ual/external/dcap/QuoteVerification/QVL/Src/AttestationCommons/include",
 )
 
 occlum_cc_library(
     name = "sgx2_qvl_lib_headers",
-    hdrs = glob(["ual/verification/platforms/sgx2/qvl/AttestationLibrary/include/**/*.h"]),
+    hdrs = glob(["ual/external/dcap/QuoteVerification/QVL/Src/AttestationLibrary/include/**/*.h"]),
     copts = ["-DENV_TYPE_OCCLUM"],
-    strip_include_prefix = "ual/verification/platforms/sgx2/qvl/AttestationLibrary/include",
+    strip_include_prefix = "ual/external/dcap/QuoteVerification/QVL/Src/AttestationLibrary/include",
 )
 
 occlum_cc_library(
     name = "sgx2_qvl_parser_headers",
-    hdrs = glob(["ual/verification/platforms/sgx2/qvl/AttestationParsers/include/**/*.h"]),
-    strip_include_prefix = "ual/verification/platforms/sgx2/qvl/AttestationParsers/include",
+    hdrs = glob(["ual/external/dcap/QuoteVerification/QVL/Src/AttestationParsers/include/**/*.h"]),
+    strip_include_prefix = "ual/external/dcap/QuoteVerification/QVL/Src/AttestationParsers/include",
 )
 
 occlum_cc_library(
     name = "sgx2_qvl_lib2_headers",
-    hdrs = glob(["ual/verification/platforms/sgx2/qvl/AttestationLibrary/src/**/*.h"]),
-    strip_include_prefix = "ual/verification/platforms/sgx2/qvl/AttestationLibrary/src",
+    hdrs = glob(["ual/external/dcap/QuoteVerification/QVL/Src/AttestationLibrary/src/**/*.h"]),
+    strip_include_prefix = "ual/external/dcap/QuoteVerification/QVL/Src/AttestationLibrary/src",
 )
 
 occlum_cc_library(
     name = "sgx2_qvl_parser2_headers",
-    hdrs = glob(["ual/verification/platforms/sgx2/qvl/AttestationParsers/src/**/*.h"]),
-    strip_include_prefix = "ual/verification/platforms/sgx2/qvl/AttestationParsers/src",
+    hdrs = glob(["ual/external/dcap/QuoteVerification/QVL/Src/AttestationParsers/src/**/*.h"]),
+    strip_include_prefix = "ual/external/dcap/QuoteVerification/QVL/Src/AttestationParsers/src",
 )
 
 occlum_cc_library(
     name = "sgx2_qvl_utils_headers",
-    hdrs = glob(["ual/verification/platforms/sgx2/qvl/AttestationCommons/include/Utils/**/*.h"]),
-    strip_include_prefix = "ual/verification/platforms/sgx2/qvl/AttestationCommons/include/Utils",
+    hdrs = glob(["ual/external/dcap/QuoteVerification/QVL/Src/AttestationCommons/include/Utils/**/*.h"]),
+    strip_include_prefix = "ual/external/dcap/QuoteVerification/QVL/Src/AttestationCommons/include/Utils",
 )
 
 occlum_cc_library(
     name = "sgx_headers",
     hdrs = glob(["ual/include/sgx/**/*.h"]),
     strip_include_prefix = "ual/include/sgx",
+)
+
+occlum_cc_library(
+    name = "sgx2_qve_headers",
+    hdrs = glob(["ual/external/dcap/QuoteVerification/QvE/Include/**/*.h"]),
+    strip_include_prefix = "ual/external/dcap/QuoteVerification/QvE/Include",
 )
 
 cc_proto_library(

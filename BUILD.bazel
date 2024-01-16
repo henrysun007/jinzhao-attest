@@ -257,7 +257,7 @@ proto_library(
 
 cc_library(
     name = "ra_header",
-    hdrs = glob(["ual/include/unified_attestation/ua_untrusted.h"]),
+    hdrs = glob(["ual/include/unified_attestation/ua_untrusted.h", "ual/include/**/*"]),
     copts = ["-DENV_TYPE_OCCLUM"],
     strip_include_prefix = "ual/include/unified_attestation/ua_untrusted.h",
 )

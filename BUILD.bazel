@@ -254,3 +254,16 @@ proto_library(
     strip_import_prefix = "ual/proto",
     visibility = ["//visibility:public"],
 )
+
+cc_library(
+    name = "ra_header",
+    hdrs = glob(["ual/include/unified_attestation/ua_untrusted.h"]),
+    copts = ["-DENV_TYPE_OCCLUM"],
+    strip_include_prefix = "ual/include/unified_attestation/ua_untrusted.h",
+)
+
+cc_import(
+    name = "libual",
+    hdrs = [":ra_header"],
+    shared_library = "build/out/libual.so",
+)
